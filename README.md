@@ -19,7 +19,7 @@
 </p>
 
 <br>
-
+<img src="https://capsule-render.vercel.app/api?type=waving&height=220&text=Party%20Console&fontAlign=50&fontAlignY=40&color=0:111111,100:00ff88&fontColor=ffffff&animation=fadeIn"/>
 <img src="https://capsule-render.vercel.app/api?type=waving&height=120&color=0:00ff88,100:111111&section=footer"/>
 
 </div>
