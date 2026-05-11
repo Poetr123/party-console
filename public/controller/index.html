@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Controller</title>
+
+<link rel="stylesheet" href="/shared/styles.css">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="screen-orientation" content="landscape">
+<meta name="orientation" content="landscape">
+</head>
+
+<body>
+
+<div id="controller">
+
+<!-- Name Screen -->
+<div id="nameScreen" class="panel-screen">
+
+<h2>ENTER NAME</h2>
+
+<input
+ id="nameInput"
+ type="text"
+ maxlength="12"
+ autocomplete="off"
+ spellcheck="false"
+/>
+
+<button id="nameBtn">
+OK
+</button>
+
+</div>
+
+<!-- Controller Screen -->
+<div id="controllerScreen" style="display:none">
+
+<!-- Top bar -->
+<div id="topBar">
+
+<button id="menuBtn" type="button" aria-label="Open menu">
+☰
+</button>
+
+<div id="roleText"></div>
+
+</div>
+
+<!-- Main content -->
+<div id="controllerContent">
+
+<!-- Controller Body -->
+<div id="controllerBody">
+
+<!-- Joystick -->
+<div id="joystickContainer">
+  <div id="joystickBase">
+    <div id="joystickStick"></div>
+  </div>
+</div>
+
+<!-- Action buttons -->
+<div id="actionButtons">
+  <button id="btn-a" type="button">A</button>
+  <button id="btn-b" type="button">B</button>
+</div>
+
+</div>
+
+<!-- Ready -->
+<div id="readyContainer">
+  <button id="readyBtn" type="button">
+    READY
+  </button>
+</div>
+
+</div>
+
+</div>
+
+<!-- Menu backdrop -->
+<div id="menuBackdrop" style="display:none"></div>
+
+<!-- Menu panel -->
+<div id="menuPanel" style="display:none">
+
+<div class="menuTitle">
+MENU
+</div>
+
+<div id="menuInfo" class="menuInfo">
+Tombol ini untuk antisipasi page/event yang nyangkut.
+</div>
+
+<div id="menuPlayers"></div>
+
+<button id="backToLobbyBtn" class="menuAction" type="button">
+Back to lobby
+</button>
+
+<button id="disconnectBtn" class="menuAction menuDanger" type="button">
+Keluar game (Disconnect)
+</button>
+
+</div>
+
+</div>
+
+<!-- Disconnected screen -->
+<div id="disconnectScreen" style="display:none">
+
+<h2>KAMU SUDAH KELUAR DARI ROOM</h2>
+
+<div id="disconnectMessage">
+Refresh halaman untuk join lagi.
+</div>
+
+<button id="reloadBtn" type="button">
+Reload
+</button>
+
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="controller.js"></script>
+
+</body>
+</html>

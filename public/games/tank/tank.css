@@ -1,0 +1,36 @@
+/*Untuk game container*/
+
+#gameContainer {
+
+  width: 100vw;
+
+  height: 100vh;
+
+  overflow: hidden;
+
+  background: #101010;
+
+  position: relative;
+
+}
+
+
+/*Untuk canvas*/
+
+#gameContainer canvas {
+
+  display: block;
+
+  width: min(100vw, calc(100vh * 1.8));
+
+  height: auto;
+
+  margin: 0 auto;
+
+  background: #101010;
+
+  border: 2px solid #333;
+
+  box-sizing: border-box;
+
+}

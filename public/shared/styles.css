@@ -1,0 +1,619 @@
+/* dasar tampilan umum */
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #111;
+  color: white;
+}
+
+/* ini biar mobile vh tidak kepotong */
+
+:root {
+  --vh: 1vh;
+}
+
+html,
+body {
+  overflow: hidden;
+  touch-action: none;
+  overscroll-behavior: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* screen laptop */
+
+#screen {
+  padding: 20px;
+}
+
+/* header screen */
+
+#header {
+  margin-bottom: 20px;
+}
+
+#header h1 {
+  margin: 0 0 12px 0;
+  font-size: 36px;
+}
+
+#ip {
+  font-size: 16px;
+  color: #f0f0f0;
+  word-break: break-word;
+}
+
+/* input dan button */
+
+input {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #333;
+  background: #1a1a1a;
+  color: white;
+  outline: none;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  border-radius: 14px;
+  border: 1px solid #333;
+  background: #f0f0f0;
+  color: #111;
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+/* lobby player list */
+
+#lobby {
+  margin-top: 20px;
+  max-width: 420px;
+}
+
+.player-slot {
+  background: #222;
+  border: 2px solid #333;
+  padding: 12px;
+  margin: 8px 0;
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 12px;
+}
+
+.host {
+  border-color: #00ff88;
+}
+
+.ready {
+  color: #00ff88;
+}
+
+.not-ready {
+  color: #ff4444;
+}
+
+/* controller utama */
+
+#controller {
+  width: 100vw;
+  height: calc(var(--vh) * 100);
+  position: relative;
+  overflow: hidden;
+}
+
+/* screen awal */
+
+.panel-screen {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* bagian atas */
+
+#topBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 0 20px;
+  box-sizing: border-box;
+  z-index: 5;
+}
+
+/* tombol menu */
+
+#menuBtn {
+  width: 60px;
+  height: 60px;
+  font-size: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+/* role text */
+
+#roleText {
+  font-size: clamp(16px, 2vw, 24px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* area utama controller */
+
+#controllerContent {
+  position: absolute;
+  inset: 0;
+  min-height: 0;
+}
+
+/* body utama controller */
+
+#controllerBody {
+  position: absolute;
+  inset: 0;
+}
+
+/* joystick kiri bawah */
+
+#joystickContainer {
+  position: absolute;
+  left: 40px;
+  bottom: 40px;
+}
+
+/* base joystick */
+
+#joystickBase {
+  width: 200px;
+  height: 200px;
+  background: #222;
+  border: 2px solid #333;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: none;
+}
+
+/* stick joystick */
+
+#joystickStick {
+  width: 70px;
+  height: 70px;
+  background: #555;
+  border-radius: 50%;
+  position: absolute;
+  transition: transform 0.04s linear;
+  pointer-events: none;
+}
+
+/* tombol kanan */
+
+#actionButtons {
+  position: absolute;
+  right: 40px;
+  top: 25%;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* tombol A B */
+
+#actionButtons button {
+  width: 92px;
+  height: 92px;
+  font-size: 22px;
+  padding: 0;
+}
+
+/* ready container */
+
+#readyContainer {
+  position: absolute;
+  left: 50%;
+  top: 60%;
+  transform: translate(-50%, -50%);
+}
+
+/* tombol ready */
+
+#readyBtn {
+  width: 280px;
+  height: 68px;
+  font-size: 20px;
+  background: #f0f0f0;
+  color: #111;
+}
+
+#readyBtn:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+}
+
+/* game row */
+
+#gameRow {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding: 10px 0;
+}
+
+.game-card {
+  min-width: 180px;
+  height: 100px;
+  background: #222;
+  border: 2px solid #333;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  transition: border 0.2s, transform 0.15s;
+}
+
+.game-selected {
+  border-color: #00ff88;
+  transform: scale(1.05);
+}
+
+/* menu overlay */
+
+#menuBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 90;
+}
+
+#menuPanel {
+  position: fixed;
+  top: 78px;
+  left: 18px;
+  width: min(340px, calc(100vw - 36px));
+  background: #171717;
+  border: 1px solid #333;
+  border-radius: 18px;
+  padding: 14px;
+  z-index: 91;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45);
+  box-sizing: border-box;
+}
+
+.menuTitle {
+  font-size: 18px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.menuInfo {
+  color: #bbbbbb;
+  font-size: 13px;
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+
+#menuPlayers {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 44vh;
+  overflow: auto;
+}
+
+.menuPlayerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  background: #202020;
+  border: 1px solid #303030;
+  border-radius: 12px;
+  padding: 10px 10px 10px 12px;
+  box-sizing: border-box;
+}
+
+.menuPlayerLabel {
+  font-size: 14px;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.kickBtn {
+  min-width: 54px;
+  height: 34px;
+  padding: 0 10px;
+  font-size: 13px;
+  border-radius: 10px;
+  background: #ff5e5e;
+  color: white;
+  border: 1px solid #ff5e5e;
+}
+
+.menuAction {
+  width: 100%;
+  margin-top: 10px;
+  height: 50px;
+  border-radius: 12px;
+  border: 1px solid #333;
+  background: #222;
+  color: white;
+  text-align: left;
+  padding: 0 14px;
+}
+
+.menuAction:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.menuDanger {
+  background: #331818;
+  border-color: #6a2a2a;
+}
+
+/* disconnected screen */
+
+#disconnectScreen {
+  width: 100vw;
+  height: calc(var(--vh) * 100);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 14px;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+#disconnectScreen button {
+  min-width: 220px;
+}
+
+/* setup overlay screen */
+
+#setupOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+#setupCard {
+  width: min(640px, calc(100vw - 32px));
+  background: rgba(18, 18, 18, 0.92);
+  border: 1px solid #333;
+  border-radius: 22px;
+  padding: 18px 18px 16px;
+  box-sizing: border-box;
+  box-shadow: 0 18px 44px rgba(0,0,0,0.45);
+  pointer-events: auto;
+}
+
+#setupTitle {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+#setupSubtitle {
+  color: #cfcfcf;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+#setupBody {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+}
+
+#setupHint {
+  margin-top: 14px;
+  color: #a8a8a8;
+  font-size: 13px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.bot-counter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.bot-count-number {
+  font-size: 92px;
+  line-height: 1;
+  font-weight: bold;
+}
+
+.bot-count-range {
+  font-size: 14px;
+  color: #cfcfcf;
+}
+
+.map-preview-wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.map-preview-card {
+  width: min(520px, 100%);
+  border-radius: 18px;
+  background: #1a1a1a;
+  border: 1px solid #303030;
+  padding: 14px;
+  box-sizing: border-box;
+}
+
+.map-preview-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.map-preview-desc {
+  font-size: 13px;
+  color: #c9c9c9;
+  margin-bottom: 12px;
+}
+
+.map-mini {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #111;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid #262626;
+}
+
+.map-mini-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 34px 34px;
+}
+
+.map-mini-obstacle {
+  position: absolute;
+  background: rgba(255,255,255,0.16);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+}
+
+.map-mini-spawn {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #00ff88;
+  transform: translate(-50%, -50%);
+}
+
+.map-list-row {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+
+.map-chip {
+  min-width: 110px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #232323;
+  border: 1px solid #333;
+  font-size: 13px;
+  color: #ddd;
+}
+
+.map-chip.selected {
+  border-color: #00ff88;
+  color: white;
+}
+
+/* game mode */
+
+.game-mode #header,
+.game-mode #lobbySection {
+  display: none;
+}
+
+.game-mode #setupOverlay {
+  display: none !important;
+}
+
+.game-mode #screen {
+  padding: 0;
+}
+
+/* responsive landscape kecil */
+
+@media (max-width: 900px) and (orientation: landscape) {
+
+  #topBar {
+    height: 60px;
+    gap: 12px;
+    padding: 0 14px;
+  }
+
+  #menuBtn {
+    width: 56px;
+    height: 56px;
+  }
+
+  #joystickContainer {
+    left: 28px;
+    bottom: 28px;
+  }
+
+  #joystickBase {
+    width: 172px;
+    height: 172px;
+  }
+
+  #actionButtons {
+    right: 28px;
+    top: 25%;
+    gap: 14px;
+  }
+
+  #actionButtons button {
+    width: 80px;
+    height: 80px;
+  }
+
+  #readyBtn {
+    width: 250px;
+    height: 62px;
+  }
+
+  #setupCard {
+    width: calc(100vw - 24px);
+  }
+}
