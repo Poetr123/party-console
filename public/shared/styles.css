@@ -25,7 +25,13 @@ body {
 /* screen laptop */
 
 #screen {
+
   padding: 20px;
+
+  box-sizing: border-box;
+
+  min-height: 100vh;
+
 }
 
 /* header screen */
@@ -265,7 +271,8 @@ button:active {
   display: flex;
   gap: 16px;
   overflow-x: auto;
-  padding: 10px 0;
+  padding: 12px 20px;
+  box-sizing: border-box;
 }
 
 .game-card {
@@ -279,13 +286,15 @@ button:active {
   justify-content: center;
   font-size: 18px;
   transition: border 0.2s, transform 0.15s;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  transform-origin: center;
 }
 
 .game-selected {
   border-color: #00ff88;
   transform: scale(1.05);
 }
-
 /* menu overlay */
 
 #menuBackdrop {
